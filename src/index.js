@@ -15,9 +15,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get("/test", (req, res) => {
-    res.json({ 
-        message: "Hello, NodeJS Playground!"
-    });
+  res.json({
+    message: "Hello, NodeJS Playground!",
+  });
 });
 
 app.use("/api/v1", mapV1Routes);
@@ -26,4 +26,6 @@ app.use(exceptionHandlerMiddleware);
 
 const port = process.env.PORT || 8081;
 
-app.listen(port, () => console.log(`Server is now running on port ${port}...🚀`));
+app.listen(port, () =>
+  console.log(`Server is now running on port ${port}...🚀`)
+);

@@ -1,7 +1,10 @@
-const TYPES = {
-    Mediator: Symbol.for("Mediator"),
-    CallController: Symbol.for("CallController"),
-    UserController: Symbol.for("UserController")
+const REPOSITORIES = {
+  CallRepository: Symbol.for("CallRepository"),
+  UserRepository: Symbol.for("UserRepository"),
 };
 
-module.exports = { TYPES }
+const HANDLERS = {
+  CreateCallCommandHandler: Symbol.for("CreateCallCommandHandler"),
+};
+
+module.exports = { REPOSITORIES, HANDLERS };

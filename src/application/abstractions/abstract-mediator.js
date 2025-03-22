@@ -5,33 +5,33 @@ const handlersPath = path.join(__dirname, "../handlers/**/*.js");
 const behaviorsPath = path.join(__dirname, "../behaviors/*.js");
 
 class AbstractMediator {
-    #handlers;
-    #behaviors;
+  #handlers;
+  #behaviors;
 
-    constructor() {
-        this.#handlers = new Map();
-        this.#behaviors = [];
+  constructor() {
+    this.#handlers = new Map();
+    this.#behaviors = [];
 
-        glob.sync(handlersPath).forEach((file) => {
-            const HandlerClass = require(file);
-            this.#handlers.set(HandlerClass.RequestType, HandlerClass);
-        });
-        
-        glob.sync(behaviorsPath).forEach((file) => {
-            const BehaviorClass = require(file);
-            const behaviorInstance = new BehaviorClass();
+    glob.sync(handlersPath).forEach((file) => {
+      const HandlerClass = require(file);
+      this.#handlers.set(HandlerClass.RequestType, HandlerClass);
+    });
 
-            this.#behaviors.push(behaviorInstance);
-        });
-    }
+    glob.sync(behaviorsPath).forEach((file) => {
+      const BehaviorClass = require(file);
+      const behaviorInstance = new BehaviorClass();
 
-    getHandlerClass(constructor) {
-        return this.#handlers.get(constructor);
-    }
+      this.#behaviors.push(behaviorInstance);
+    });
+  }
 
-    getBehaviors() {
-        return this.#behaviors.reverse();
-    }
+  getHandlers() {
+    return this.#handlers;
+  }
+
+  getBehaviors() {
+    return this.#behaviors.reverse();
+  }
 }
 
 module.exports = AbstractMediator;

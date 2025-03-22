@@ -1,16 +1,16 @@
 class CreateCallCommand {
-    #requestBody;
+  #requestBody;
 
-    constructor(requestBody) {
-        this.#requestBody = requestBody;
-    }
+  constructor(requestBody) {
+    this.#requestBody = requestBody;
+  }
 
-    validate() {
-        const errors = [];
-        console.log("CreateCallCommand validated!");
+  validate() {
+    const errors = [];
+    console.log("CreateCallCommand validated!");
 
-        return errors;
-    }
+    return errors;
+  }
 }
 
 module.exports = CreateCallCommand;
