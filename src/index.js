@@ -1,11 +1,12 @@
 require("dotenv").config();
-require("./infrastructure/container");
+require("reflect-metadata");
+// require("./infrastructure/container");
 
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-
-const exceptionHandlerMiddleware = require("./apis/middlewares/exception");
+const mapV1Routes = require("./apis/routes/v1/routes");
+const exceptionHandlerMiddleware = require("./apis/middlewares/exception-handler-middleware");
 
 const app = express();
 
@@ -19,6 +20,8 @@ app.get("/test", (req, res) => {
         message: "Hello, NodeJS Playground!"
     });
 });
+
+app.use("/api/v1", mapV1Routes);
 
 app.use(exceptionHandlerMiddleware);
 

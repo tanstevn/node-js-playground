@@ -1,4 +1,4 @@
-const ValidationError = require("../../shared/errors");
+const ValidationError = require("../../shared/validation-errors");
 
 const ExceptionHandlerMiddleware = (err, req, res, next) => {
     if (err instanceof ValidationError) {

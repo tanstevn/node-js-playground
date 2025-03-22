@@ -1,28 +1,32 @@
-const container = require("./container");
+require("reflect-metadata");
+const { decorate, injectable } = require("inversify");
+const AbstractMediator = require("../application/abstractions/abstract-mediator");
 
-class Mediator {
-    #pipelines;
-
+class Mediator extends AbstractMediator {
     constructor() {
-        this.#pipelines = [];
+        super();
     }
-
-    usePipelineBehavior(behavior) {
-        this.#pipelines.push(behavior);
-    }
-
+    
     async send(request) {
-        const handler = container.get(request.constructor);
+        const registeredHandlers = super.getHandlers();
+        const requestHandler = registeredHandlers.get(request.constructor);
+        const pipelineBehaviors = super.getBehaviors();
 
-        if (!handler) {
-            throw new Error(`There is no handler for ${request.constructor.name} registered.`);
+        const lastHandler = async () => {
+            return requestHandler.handle(request);
         }
 
-        for (const pipeline in this.#pipelines) {
-            await pipeline.handle(request);
-        }
+        let aggregateResult = lastHandler;        
 
-        return handler.handle(request);
+        pipelineBehaviors.forEach((behavior) => {
+            const nextValue = aggregateResult;
+            
+            aggregateResult = async () => {
+                return await behavior.handle(request, nextValue);
+            }
+        });
+
+        return await aggregateResult();
     }
 }
 
