@@ -1,9 +1,7 @@
-const AbstractBehavior = require("../abstractions/abstract-behavior");
-
-class LoggingBehavior extends AbstractBehavior {
+class LoggingBehavior {
     async handle(request, next) {
         const start = process.hrtime();
-        
+
         console.log(`Request for ${request.constructor.name} is now processing.`);
         
         const result = await next(request);

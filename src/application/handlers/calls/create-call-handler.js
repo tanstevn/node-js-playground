@@ -7,8 +7,7 @@ class CreateCallHandler {
         console.log("JEYVEN ROMENEIL LAVARIAS TAN!");
 
         return {
-            success: true,
-            message: request.test
+            success: true
         };
     }
 }

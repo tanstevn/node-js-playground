@@ -1,5 +1,3 @@
-require("reflect-metadata");
-const { decorate, injectable } = require("inversify");
 const AbstractMediator = require("../application/abstractions/abstract-mediator");
 
 class Mediator extends AbstractMediator {
@@ -8,15 +6,20 @@ class Mediator extends AbstractMediator {
     }
     
     async send(request) {
-        const registeredHandlers = super.getHandlers();
-        const requestHandler = registeredHandlers.get(request.constructor);
+        const HandlerClass = super.getHandlerClass(request.constructor);
+
+        if (!HandlerClass) {
+            return new Error(`No handler registered for ${request.constructor.name}.`);
+        }
+
+        const requestHandler = new HandlerClass();
         const pipelineBehaviors = super.getBehaviors();
 
         const lastHandler = async () => {
             return requestHandler.handle(request);
         }
 
-        let aggregateResult = lastHandler;        
+        let aggregateResult = lastHandler;
 
         pipelineBehaviors.forEach((behavior) => {
             const nextValue = aggregateResult;

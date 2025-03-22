@@ -14,9 +14,7 @@ class AbstractMediator {
 
         glob.sync(handlersPath).forEach((file) => {
             const HandlerClass = require(file);
-            const handlerInstance = new HandlerClass();
-
-            this.#handlers.set(HandlerClass.RequestType, handlerInstance);
+            this.#handlers.set(HandlerClass.RequestType, HandlerClass);
         });
         
         glob.sync(behaviorsPath).forEach((file) => {
@@ -27,8 +25,8 @@ class AbstractMediator {
         });
     }
 
-    getHandlers() {
-        return this.#handlers;
+    getHandlerClass(constructor) {
+        return this.#handlers.get(constructor);
     }
 
     getBehaviors() {

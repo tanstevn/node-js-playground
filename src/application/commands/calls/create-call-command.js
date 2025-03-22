@@ -1,6 +1,8 @@
 class CreateCallCommand {
-    constructor(test) {
-        this.test = test;
+    #requestBody;
+
+    constructor(requestBody) {
+        this.#requestBody = requestBody;
     }
 
     validate() {

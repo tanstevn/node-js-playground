@@ -2,12 +2,10 @@ require("reflect-metadata");
 const { Container } = require("inversify");
 const { TYPES } = require("../shared/types");
 
-const CallController = require("../apis/controllers/call-controller");
-const Mediator = require("./mediator");
-
 const container = new Container();
 
-container.bind(CallController).toSelf();
-container.bind(TYPES.Mediator).to(Mediator).inRequestScope();
+// container.bind(TYPES.Mediator).toConstantValue(new Mediator());
+// container.bind(TYPES.CallController).to(CallController).inRequestScope();
+// container.bind(TYPES.UserController).to(UserController).inRequestScope();
 
 module.exports = container;

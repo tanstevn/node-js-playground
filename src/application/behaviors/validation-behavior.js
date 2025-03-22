@@ -1,6 +1,4 @@
-const AbstractBehavior = require("../abstractions/abstract-behavior");
-
-class ValidationBehavior extends AbstractBehavior {
+class ValidationBehavior {
     async handle(request, next) {
         if (!request.validate) {
             return await next(request);

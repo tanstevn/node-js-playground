@@ -1,6 +1,5 @@
 require("dotenv").config();
 require("reflect-metadata");
-// require("./infrastructure/container");
 
 const express = require("express");
 const cors = require("cors");
