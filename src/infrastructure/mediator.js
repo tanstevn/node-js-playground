@@ -11,9 +11,7 @@ class Mediator extends AbstractMediator {
     const HandlerClass = registeredHandlers.get(request.constructor);
 
     if (!HandlerClass) {
-      return new Error(
-        `No handler registered for ${request.constructor.name}.`
-      );
+      throw new Error(`No handler registered for ${request.constructor.name}.`);
     }
 
     const handlerName = `${request.constructor.name}Handler`;
