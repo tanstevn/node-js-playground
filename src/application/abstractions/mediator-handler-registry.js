@@ -1,4 +1,5 @@
 const glob = require("glob");
+const path = require("path");
 const { HANDLERS } = require("../../shared/types");
 
 class MediatorHandlerRegistry {
@@ -8,9 +9,9 @@ class MediatorHandlerRegistry {
     this.#handlers = new Map();
   }
 
-  registerRequestHandlersByDirectoryPath(path) {
-    glob.sync(path).forEach((file) => {
-      const handlerClass = require(file);
+  registerRequestHandlersByDirectoryPath(handlersPath) {
+    glob.sync(handlersPath).forEach((file) => {
+      const handlerClass = require(path.resolve(file));
       const handlerSymbol = HANDLERS[handlerClass.name];
       this.#handlers.set(handlerClass.RequestType, handlerSymbol);
     });

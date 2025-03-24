@@ -1,4 +1,5 @@
 const glob = require("glob");
+const path = require("path");
 const { BEHAVIORS } = require("../../shared/types");
 
 class MediatorBehaviorRegistry {
@@ -8,9 +9,9 @@ class MediatorBehaviorRegistry {
     this.#behaviors = [];
   }
 
-  registerPipelineBehaviorsByDirectoryPath(path) {
-    glob.sync(path).forEach((file) => {
-      const behaviorClass = require(file);
+  registerPipelineBehaviorsByDirectoryPath(behaviorsPath) {
+    glob.sync(behaviorsPath).forEach((file) => {
+      const behaviorClass = require(path.resolve(file));
       const behaviorSymbol = BEHAVIORS[behaviorClass.name];
       this.#behaviors.push(behaviorSymbol);
     });
