@@ -6,13 +6,17 @@ class ProductController extends BaseController {
     super(mediator);
   }
 
-  async getPaginatedProductList(req, res) {
-    console.log("ProductController.getPaginatedProductList!");
+  async getPaginatedProductList(req, res, next) {
+    try {
+      console.log("ProductController.getPaginatedProductList!");
 
-    const query = new GetPaginatedProductListQuery(req.query);
-    const result = await super.mediator.send(query);
+      const query = new GetPaginatedProductListQuery(req.query);
+      const result = await super.mediator.send(query);
 
-    res.status(200).json(result);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
   }
 }
 

@@ -6,8 +6,8 @@ const router = express.Router();
 
 const ProductController = container.get(CONTROLLERS.ProductController);
 
-router.get("/", (req, res) =>
-  ProductController.getPaginatedProductList(req, res)
+router.get("/", (req, res, next) =>
+  ProductController.getPaginatedProductList(req, res, next)
 );
 
 router.post("/", (req, res) => {});

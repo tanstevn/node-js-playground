@@ -1,3 +1,5 @@
+const ValidationError = require("../../shared/validation-errors");
+
 class ValidationBehavior {
   async handle(request, next) {
     if (!request.validate) {
@@ -7,12 +9,13 @@ class ValidationBehavior {
     const errors = request.validate();
 
     if (errors && errors.length > 0) {
-      throw new Error(
+      throw new ValidationError(
+        request.constructor.name,
         `Request validation for ${request.constructor.name} failed: ${errors.join(", ")}`
       );
     }
 
-    await next(request);
+    return await next(request);
   }
 }
 
