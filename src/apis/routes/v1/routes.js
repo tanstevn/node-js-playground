@@ -7,10 +7,10 @@ const paymentEndpoints = require("./endpoints/payment-endpoints");
 
 const router = express.Router();
 
-router.use("/call", callEndpoints);
-router.use("/product", productEndpoints);
-router.use("/order", orderEndpoints);
-router.use("/cart", cartEndpoints);
-router.use("/payment", paymentEndpoints);
+router.use("/calls", callEndpoints);
+router.use("/products", productEndpoints);
+router.use("/orders", orderEndpoints);
+router.use("/carts", cartEndpoints);
+router.use("/payments", paymentEndpoints);
 
 module.exports = router;
