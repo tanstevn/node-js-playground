@@ -1,24 +1,22 @@
-const container = require("../infrastructure/container");
-const AbstractMediator = require("../application/abstractions/abstract-mediator");
+class Mediator {
+  #container;
+  #handlers;
+  #behaviors;
 
-class Mediator extends AbstractMediator {
-  constructor() {
-    super();
+  constructor(container, handlers, behaviors) {
+    this.#container = container;
+    this.#handlers = handlers;
+    this.#behaviors = behaviors;
   }
 
   async send(request) {
-    const registeredHandlers = super.getHandlers();
-    const HandlerClass = registeredHandlers.get(request.constructor);
+    const handlerSymbol = this.#handlers.get(request.constructor);
 
-    if (!HandlerClass) {
+    if (!handlerSymbol) {
       throw new Error(`No handler registered for ${request.constructor.name}.`);
     }
 
-    const handlerName = `${request.constructor.name}Handler`;
-    const handlerSymbol = Symbol.for(handlerName);
-
-    const requestHandler = container.get(handlerSymbol);
-    const pipelineBehaviors = super.getBehaviors();
+    const requestHandler = this.#container.get(handlerSymbol);
 
     const lastHandler = async () => {
       return requestHandler.handle(request);
@@ -26,7 +24,8 @@ class Mediator extends AbstractMediator {
 
     let aggregateResult = lastHandler;
 
-    pipelineBehaviors.forEach((behavior) => {
+    this.#behaviors.forEach((behaviorSymbol) => {
+      const behavior = this.#container.get(behaviorSymbol);
       const nextValue = aggregateResult;
 
       aggregateResult = async () => {
@@ -38,4 +37,4 @@ class Mediator extends AbstractMediator {
   }
 }
 
-module.exports = new Mediator();
+module.exports = Mediator;

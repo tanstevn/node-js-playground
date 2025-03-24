@@ -1,7 +1,11 @@
-const CallController = require("../../../controllers/call-controller");
+const container = require("../../../../infrastructure/container");
+const { CONTROLLERS } = require("../../../../shared/types");
+
+const CallController = container.get(CONTROLLERS.CallController);
+
 const express = require("express");
 const router = express.Router();
 
-router.get("/test", CallController.createCall);
+router.get("/test", (req, res) => CallController.createCall(req, res));
 
 module.exports = router;
