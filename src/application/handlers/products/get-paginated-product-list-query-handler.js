@@ -1,3 +1,4 @@
+const PaginatedResult = require("../../../shared/models/paginated-result");
 const GetPaginatedProductListQuery = require("../../queries/products/get-paginated-product-list-query");
 
 class GetPaginatedProductListQueryHandler {
