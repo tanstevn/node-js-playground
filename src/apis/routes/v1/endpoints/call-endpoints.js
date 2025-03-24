@@ -1,4 +1,4 @@
-const container = require("../../../../infrastructure/container");
+const container = require("../../../../infrastructure/container/container");
 const { CONTROLLERS } = require("../../../../shared/types");
 
 const CallController = container.get(CONTROLLERS.CallController);

@@ -17,7 +17,7 @@ class MediatorBehaviorRegistry {
     });
   }
 
-  getBehaviors() {
+  get behaviors() {
     return this.#behaviors.reverse();
   }
 }

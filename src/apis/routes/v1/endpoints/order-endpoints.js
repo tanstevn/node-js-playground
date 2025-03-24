@@ -1,4 +1,4 @@
-const container = require("../../../../infrastructure/container");
+const container = require("../../../../infrastructure/container/container");
 
 const express = require("express");
 const router = express.Router();

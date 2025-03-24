@@ -17,7 +17,7 @@ class MediatorHandlerRegistry {
     });
   }
 
-  getHandlers() {
+  get handlers() {
     return this.#handlers;
   }
 }
