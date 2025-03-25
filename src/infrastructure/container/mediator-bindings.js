@@ -1,17 +1,18 @@
 const path = require("path");
 const { SERVICES } = require("../../shared/types");
-const Mediator = require("../../application/abstractions/mediator");
-const MediatorHandlerRegistry = require("../../application/abstractions/mediator-handler-registry");
-const MediatorBehaviorRegistry = require("../../application/abstractions/mediator-behavior-registry");
+const Mediator = require("../../application/mediator/mediator");
+const MediatorHandlerRegistry = require("../../application/mediator/mediator-handler-registry");
+const MediatorBehaviorRegistry = require("../../application/mediator/mediator-behavior-registry");
 
 module.exports = (container) => {
   const handlersPath = path.join(
     __dirname,
     "../../application/handlers/**/*.js"
   );
+
   const behaviorsPath = path.join(
     __dirname,
-    "../../application/behaviors/*.js"
+    "../../apis/middlewares/behaviors/*.js"
   );
 
   const handlerRegistry = new MediatorHandlerRegistry();

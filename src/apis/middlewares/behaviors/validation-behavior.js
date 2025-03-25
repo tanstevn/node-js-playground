@@ -1,4 +1,4 @@
-const ValidationError = require("../../shared/validation-errors");
+const ValidationError = require("../../../shared/validation-errors");
 
 class ValidationBehavior {
   async handle(request, next) {

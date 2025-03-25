@@ -1,6 +1,6 @@
 const { BEHAVIORS } = require("../../shared/types");
-const LoggingBehavior = require("../../application/behaviors/logging-behavior");
-const ValidationBehavior = require("../../application/behaviors/validation-behavior");
+const LoggingBehavior = require("../../apis/middlewares/behaviors/logging-behavior");
+const ValidationBehavior = require("../../apis/middlewares/behaviors/validation-behavior");
 
 module.exports = (container) => {
   container
