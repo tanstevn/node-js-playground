@@ -1,6 +1,6 @@
 const { REPOSITORIES } = require("../../shared/types");
-const CallRepository = require("../data/call-repository");
-const ProductRepository = require("../data/product-repository");
+const CallRepository = require("../repositories/call-repository");
+const ProductRepository = require("../repositories/product-repository");
 
 module.exports = (container) => {
   container
